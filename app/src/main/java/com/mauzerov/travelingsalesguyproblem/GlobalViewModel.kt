@@ -1,5 +1,6 @@
 package com.mauzerov.travelingsalesguyproblem
 
 object GlobalViewModel {
-    val cities = mutableListOf<String>()
+    @JvmStatic
+    val cities = mutableListOf<String>("ABC", "DEC")
 }

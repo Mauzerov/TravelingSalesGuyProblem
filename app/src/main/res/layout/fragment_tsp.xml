@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-            name="this"
-            type="com.mauzerov.travelingsalesguyproblem.TSPFragment" />
+            name="self"
+            type="com.mauzerov.travelingsalesguyproblem.TSPFragment.Vm" />
+        <variable
+            name="sharedVm"
+            type="com.mauzerov.travelingsalesguyproblem.MainActivityViewModel" />
     </data>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -15,8 +18,18 @@
     <LinearLayout
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <AutoCompleteTextView
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <EditText
+            android:layout_width="match_parent"
+            android:text="@={self.text}"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:text="dodaj"
+            app:onClickListener="@{(v) -> sharedVm.cities.add(self.text)}"
+            android:layout_height="wrap_content"/>
+        <Spinner
             android:id="@+id/fragmentTspStartCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
