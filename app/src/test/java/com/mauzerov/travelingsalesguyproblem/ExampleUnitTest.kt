@@ -16,8 +16,8 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun observableListOfGraph() {
-        val graph = Graph<Int>()
+    fun autoGeneratingGraph() {
+        val graph = AutoGeneratingGraph<Int>()
 
         graph.addNode(1)
         graph.addNode(2)
@@ -25,7 +25,7 @@ class ExampleUnitTest {
         graph.addEdge(from = 1, 2, 1)
 
         graph.removeNode(1)
-        assert(graph.edges.isEmpty())
+        assert(graph.getEdges().isEmpty())
 
         graph.addNode(1)
         graph.addEdge(from = 2, 1, 1)
@@ -34,8 +34,8 @@ class ExampleUnitTest {
         graph.addEdge(from = 1, 3, 1)
 
         graph.removeNode(1)
-        assert(graph.edges.isEmpty())
+        assert(graph.getEdges().isEmpty())
 
-        assertEquals(graph.nodes.size, 2)
+        assertEquals(graph.getNodes().size, 2)
     }
 }
