@@ -13,23 +13,33 @@ import com.mauzerov.travelingsalesguyproblem.databinding.FragmentTspBinding
 
 class TSPFragment(private val sharedViewModel: MainActivityViewModel) : Fragment() {
     private lateinit var binding: FragmentTspBinding
-    class Vm : BaseObservable(){
-        @Bindable
-        var text: String = ""
-    }
+//    class Vm : BaseObservable(){
+//        @Bindable
+//    }
+    var text: String = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tsp, container, false)
-        binding.fragmentTspStartCity.adapter = ArrayAdapter<String>(
-            binding.fragmentTspStartCity.context,
-            androidx.databinding.library.baseAdapters.R.layout.support_simple_spinner_dropdown_item,
-            GlobalViewModel.cities
-        )
+
+        sharedViewModel.citiesLiveData.observe(viewLifecycleOwner) {
+            binding.fragmentTspStartCity.adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                it)
+        }
+
+        sharedViewModel.graph.observe(viewLifecycleOwner) {
+            binding.autocompleteStartCity.setAdapter(ArrayAdapter(
+                requireContext(),
+                android.R.layout.select_dialog_item,
+                it.getNodes()))
+        }
+
         binding.sharedVm = sharedViewModel
-        binding.self = Vm()
+        binding.self = this
         return binding.root
     }
 }

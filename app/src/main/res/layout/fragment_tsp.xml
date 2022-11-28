@@ -3,7 +3,7 @@
     <data>
         <variable
             name="self"
-            type="com.mauzerov.travelingsalesguyproblem.TSPFragment.Vm" />
+            type="com.mauzerov.travelingsalesguyproblem.TSPFragment" />
         <variable
             name="sharedVm"
             type="com.mauzerov.travelingsalesguyproblem.MainActivityViewModel" />
@@ -27,8 +27,16 @@
         <Button
             android:layout_width="wrap_content"
             android:text="dodaj"
-            app:onClickListener="@{(v) -> sharedVm.cities.add(self.text)}"
+            app:onClickListener="@{(v) -> sharedVm.citiesLiveData.add(self.text)}"
             android:layout_height="wrap_content"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/autocompleteStartCity"
+            android:layout_width="match_parent"
+            android:completionThreshold="0"
+            android:text=""
+            android:layout_height="wrap_content"/>
+
         <Spinner
             android:id="@+id/fragmentTspStartCity"
             android:layout_width="match_parent"
