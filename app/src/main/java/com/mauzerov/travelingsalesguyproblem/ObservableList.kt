@@ -25,4 +25,14 @@ class ObservableList<T>(private val wrapped: MutableList<T>): MutableList<T> by 
         }
         else false
     }
+
+    override fun removeAt(index: Int): T {
+        val `return` = this[index]
+        if (wrapped.remove(this[index])) {
+            setChanged()
+            notifyObservers(Argument(ChangeType.REMOVE, `return`))
+            return`return`
+        }
+        throw IndexOutOfBoundsException()
+    }
 }
