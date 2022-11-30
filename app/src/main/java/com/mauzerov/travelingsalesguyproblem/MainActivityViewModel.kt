@@ -13,10 +13,11 @@ class MainActivityViewModel : BaseObservable() {
         )
     }
 
-    val graph =
-        MutableLiveData(
+    val graph = MutableLiveData(
             AutoGeneratingGraph<String>()
-        )
+    ).apply {
+        value?.addObserver { postValue(value) }
+    }
 
     init {
         graph.value?.addNode("ABC")
