@@ -31,7 +31,7 @@ class TSPFragment(private val sharedViewModel: MainActivityViewModel) : Fragment
                 it)
         }
 
-        sharedViewModel.graph.observe(viewLifecycleOwner) {
+        sharedViewModel.graphObservable.observe(viewLifecycleOwner) {
             binding.autocompleteStartCity.setAdapter(ArrayAdapter(
                 requireContext(),
                 android.R.layout.select_dialog_item,
