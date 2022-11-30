@@ -2,6 +2,11 @@ package com.mauzerov.travelingsalesguyproblem
 
 class AutoGeneratingGraph<T> : Graph<T> {
     private val nodes: ObservableList<T> = ObservableList(mutableListOf())
+    private val observers: MutableList<() -> Unit> = mutableListOf()
+
+    fun addObserver(observer :  () -> Unit) {
+        observers.add(observer)
+    }
 
     override fun getNodes(): List<T> {
         return nodes
@@ -18,7 +23,7 @@ class AutoGeneratingGraph<T> : Graph<T> {
     }
 
     override fun removeNode(node: T) {
-        nodes.remove(node)
+        nodes.remove(nodes.first { it == node })
     }
 
     override fun addEdge(from: T, to: T, weight: Int) {
@@ -35,6 +40,8 @@ class AutoGeneratingGraph<T> : Graph<T> {
 
     init {
         nodes.addObserver { _, arg ->
+            observers.forEach { it.invoke() }
+
             (arg as? ObservableList.Argument<*>)?.let { argument ->
                 val (updateType, node) = argument
 
