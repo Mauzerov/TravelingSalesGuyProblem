@@ -9,7 +9,7 @@ import com.mauzerov.travelingsalesguyproblem.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
+    private val mainActivityViewModel = MainActivityViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,7 +30,8 @@ class MainActivity : AppCompatActivity() {
         }
         binding.viewPager.apply {
             adapter = TabLayoutAdapter(supportFragmentManager, lifecycle).apply {
-                addFragment(TSPFragment(MainActivityViewModel()))
+                addFragment(TSPFragment(mainActivityViewModel))
+                addFragment(CitiesFragment(mainActivityViewModel))
             }
             orientation = ViewPager2.ORIENTATION_VERTICAL
         }
