@@ -5,7 +5,10 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
+import com.mauzerov.travelingsalesguyproblem.adapter.TabLayoutAdapter
 import com.mauzerov.travelingsalesguyproblem.databinding.ActivityMainBinding
+import com.mauzerov.travelingsalesguyproblem.fragments.CitiesFragment
+import com.mauzerov.travelingsalesguyproblem.fragments.TSPFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

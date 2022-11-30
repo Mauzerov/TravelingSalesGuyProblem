@@ -3,7 +3,7 @@ package com.mauzerov.travelingsalesguyproblem
 import androidx.databinding.BaseObservable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import kotlin.properties.Delegates
+import com.mauzerov.travelingsalesguyproblem.graph.AutoGeneratingGraph
 
 class MainActivityViewModel : BaseObservable() {
     // Live Data List Of City Names

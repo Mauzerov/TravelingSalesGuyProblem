@@ -1,4 +1,4 @@
-package com.mauzerov.travelingsalesguyproblem
+package com.mauzerov.travelingsalesguyproblem.graph
 
 interface Graph<T> {
     data class Edge<T>(

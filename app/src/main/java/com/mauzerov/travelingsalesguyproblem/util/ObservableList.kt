@@ -1,4 +1,4 @@
-package com.mauzerov.travelingsalesguyproblem
+package com.mauzerov.travelingsalesguyproblem.util
 
 import java.util.*
 

@@ -1,4 +1,6 @@
-package com.mauzerov.travelingsalesguyproblem
+package com.mauzerov.travelingsalesguyproblem.graph
+
+import com.mauzerov.travelingsalesguyproblem.util.ObservableList
 
 class AutoGeneratingGraph<T> : Graph<T> {
     private val nodes: ObservableList<T> = ObservableList(mutableListOf())
@@ -40,7 +42,7 @@ class AutoGeneratingGraph<T> : Graph<T> {
 
     init {
         nodes.addObserver { _, arg ->
-            observers.forEach { it.invoke() }
+            observers.forEach { it() }
 
             (arg as? ObservableList.Argument<*>)?.let { argument ->
                 val (updateType, node) = argument

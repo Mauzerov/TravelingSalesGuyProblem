@@ -1,4 +1,4 @@
-package com.mauzerov.travelingsalesguyproblem
+package com.mauzerov.travelingsalesguyproblem.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.ImageButton
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import com.mauzerov.travelingsalesguyproblem.MainActivityViewModel
+import com.mauzerov.travelingsalesguyproblem.R
 import com.mauzerov.travelingsalesguyproblem.databinding.FragmentCitiesBinding
 
 class CitiesFragment(private val sharedViewModel: MainActivityViewModel) : Fragment() {

@@ -1,5 +1,6 @@
 package com.mauzerov.travelingsalesguyproblem
 
+import com.mauzerov.travelingsalesguyproblem.graph.AutoGeneratingGraph
 import org.junit.Test
 
 import org.junit.Assert.*

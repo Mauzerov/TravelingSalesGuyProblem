@@ -1,4 +1,4 @@
-package com.mauzerov.travelingsalesguyproblem
+package com.mauzerov.travelingsalesguyproblem.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

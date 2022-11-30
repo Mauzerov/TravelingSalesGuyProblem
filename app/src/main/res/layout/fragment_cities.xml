@@ -5,7 +5,7 @@
     <data>
         <variable
             name="self"
-            type="com.mauzerov.travelingsalesguyproblem.CitiesFragment" />
+            type="com.mauzerov.travelingsalesguyproblem.fragments.CitiesFragment" />
         <variable
             name="sharedVm"
             type="com.mauzerov.travelingsalesguyproblem.MainActivityViewModel" />
@@ -14,7 +14,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CitiesFragment">
+    tools:context=".fragments.CitiesFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
