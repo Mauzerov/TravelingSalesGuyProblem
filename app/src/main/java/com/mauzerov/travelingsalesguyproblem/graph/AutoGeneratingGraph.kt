@@ -1,6 +1,8 @@
 package com.mauzerov.travelingsalesguyproblem.graph
 
+import androidx.databinding.InverseMethod
 import com.mauzerov.travelingsalesguyproblem.util.ObservableList
+import kotlin.random.Random
 
 class AutoGeneratingGraph<T> : Graph<T> {
     private val nodes: ObservableList<T> = ObservableList(mutableListOf())
@@ -22,6 +24,11 @@ class AutoGeneratingGraph<T> : Graph<T> {
 
     override fun addNode(node: T) {
         nodes.add(node)
+        for (existingNode in nodes) {
+            if (existingNode != node) {
+                edges.add(Graph.Edge(existingNode, node, Random.nextInt(1,100)))
+            }
+        }
     }
 
     override fun removeNode(node: T) {
@@ -56,11 +63,32 @@ class AutoGeneratingGraph<T> : Graph<T> {
         }
     }
 
-    override fun getWeight(from: T, to: T): Int {
-        return edges.first { it.from == from && it.to == to }.weight
+    override fun getEdgeWeight(from: T, to: T): Int? {
+        return edges.firstOrNull {
+            it.from == from && it.to == to ||
+            it.from == to && it.to == from
+        }?.weight
     }
 
-    override fun getWeight(fromIndex: Int, toIndex: Int): Int {
-        return edges.first { it.from == nodes[fromIndex] && it.to == nodes[toIndex] }.weight
+    override fun getEdgeWeight(fromIndex: Int, toIndex: Int): Int? {
+        if (fromIndex !in nodes.indices || toIndex !in nodes.indices) {
+            return null
+        }
+
+        return getEdgeWeight(nodes[fromIndex], nodes[toIndex])
+    }
+
+    override fun setEdgeWeight(from: T, to: T, weight: Int){
+        edges.firstOrNull {
+            it.from == from && it.to == to ||
+            it.from == to && it.to == from
+        }?.weight = weight
+    }
+
+    override fun setEdgeWeight(fromIndex: Int, toIndex: Int, weight: Int){
+        if (fromIndex !in nodes.indices || toIndex !in nodes.indices) {
+            return
+        }
+        setEdgeWeight(nodes[fromIndex], nodes[toIndex], weight)
     }
 }

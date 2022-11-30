@@ -4,7 +4,7 @@ interface Graph<T> {
     data class Edge<T>(
         val from: T,
         val to: T,
-        val weight: Int
+        var weight: Int
     )
 
     fun addNode(node: T)
@@ -21,7 +21,11 @@ interface Graph<T> {
 
     fun getEdges(): List<Edge<T>>
 
-    fun getWeight(from: T, to: T): Int
+    fun getEdgeWeight(from: T, to: T): Int?
 
-    fun getWeight(fromIndex: Int, toIndex: Int): Int
+    fun getEdgeWeight(fromIndex: Int, toIndex: Int): Int?
+
+    fun setEdgeWeight(from: T, to: T, weight: Int)
+
+    fun setEdgeWeight(fromIndex: Int, toIndex: Int, weight: Int)
 }
