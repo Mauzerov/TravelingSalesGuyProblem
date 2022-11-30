@@ -8,6 +8,7 @@ import com.google.android.material.tabs.TabLayout
 import com.mauzerov.travelingsalesguyproblem.adapter.TabLayoutAdapter
 import com.mauzerov.travelingsalesguyproblem.databinding.ActivityMainBinding
 import com.mauzerov.travelingsalesguyproblem.fragments.CitiesFragment
+import com.mauzerov.travelingsalesguyproblem.fragments.ConnectionsFragment
 import com.mauzerov.travelingsalesguyproblem.fragments.TSPFragment
 
 class MainActivity : AppCompatActivity() {
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
             adapter = TabLayoutAdapter(supportFragmentManager, lifecycle).apply {
                 addFragment(TSPFragment(mainActivityViewModel))
                 addFragment(CitiesFragment(mainActivityViewModel))
+                addFragment(ConnectionsFragment(mainActivityViewModel))
             }
             orientation = ViewPager2.ORIENTATION_VERTICAL
         }

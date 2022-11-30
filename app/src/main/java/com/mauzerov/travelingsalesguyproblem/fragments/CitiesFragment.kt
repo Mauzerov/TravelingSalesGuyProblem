@@ -25,7 +25,7 @@ class CitiesFragment(private val sharedViewModel: MainActivityViewModel) : Fragm
         binding.sharedVm = sharedViewModel
         binding.self = this
 
-        sharedViewModel.graph.observe(viewLifecycleOwner) { graph ->
+        sharedViewModel.graphObservable.observe(viewLifecycleOwner) { graph ->
             binding.citiesFragmentAllCities.adapter = object :
                 ArrayAdapter<String>(
                     requireContext(),
