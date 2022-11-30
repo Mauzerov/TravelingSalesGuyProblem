@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="self"
+            type="com.mauzerov.travelingsalesguyproblem.fragments.ConnectionsFragment" />
+        <variable
+            name="sharedVm"
+            type="com.mauzerov.travelingsalesguyproblem.MainActivityViewModel" />
+        <import type="com.mauzerov.travelingsalesguyproblem.adapter.IC"/>
+    </data>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.ConnectionsFragment">
+
+    <Spinner
+        android:id="@+id/from_city_spinner"
+        android:layout_width="match_parent"
+        android:selectedItemPosition="@={self.fromCity}"
+        android:onItemSelected="@{(parent, view, pos, id) -> self.updateDistance()}"
+        android:layout_height="wrap_content"/>
+
+    <Spinner
+        android:id="@+id/to_city_spinner"
+        android:layout_width="match_parent"
+        android:selectedItemPosition="@={self.toCity}"
+        android:onItemSelected="@{(parent, view, pos, id) -> self.updateDistance()}"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Distance"
+        android:text="@={self.distance}"
+        android:inputType="number"/>
+
+</LinearLayout>
+</layout>
