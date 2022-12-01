@@ -20,20 +20,21 @@
     <Spinner
         android:id="@+id/from_city_spinner"
         android:layout_width="match_parent"
-        android:selectedItemPosition="@={self.fromCity}"
+        android:layout_height="@dimen/image_button_square_size"
         android:onItemSelected="@{(parent, view, pos, id) -> self.updateDistance()}"
-        android:layout_height="wrap_content"/>
+        android:selectedItemPosition="@={self.fromCity}" />
 
     <Spinner
         android:id="@+id/to_city_spinner"
         android:layout_width="match_parent"
-        android:selectedItemPosition="@={self.toCity}"
+        android:layout_height="@dimen/image_button_square_size"
         android:onItemSelected="@{(parent, view, pos, id) -> self.updateDistance()}"
-        android:layout_height="wrap_content"/>
-
+        android:selectedItemPosition="@={self.toCity}" />
+    
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:enabled="@{self.toCity != self.fromCity}"
         android:hint="Distance"
         android:text="@={self.distance}"
         android:inputType="number"/>
