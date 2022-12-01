@@ -38,7 +38,13 @@ class MainActivity : AppCompatActivity() {
                 addFragment(CitiesFragment(mainActivityViewModel))
                 addFragment(ConnectionsFragment(mainActivityViewModel))
             }
-            orientation = ViewPager2.ORIENTATION_VERTICAL
+            orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    binding.tabLayout.selectTab(binding.tabLayout.getTabAt(position))
+                }
+            })
         }
     }
 }
