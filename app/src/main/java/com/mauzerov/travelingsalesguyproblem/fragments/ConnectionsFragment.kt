@@ -35,7 +35,7 @@ class ConnectionsFragment(private val sharedViewModel: MainActivityViewModel) :
             sharedViewModel.graph.setEdgeWeight(toCity, fromCity, value.toInt())
         }
     fun updateDistance() {
-        notifyPropertyChanged(BR.distance)
+        notifyPropertyChanged(BR._all)
     }
 
 
