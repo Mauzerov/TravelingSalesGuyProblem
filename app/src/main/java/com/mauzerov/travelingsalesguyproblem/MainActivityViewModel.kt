@@ -10,13 +10,6 @@ import com.mauzerov.travelingsalesguyproblem.graph.Graph
 import com.mauzerov.travelingsalesguyproblem.util.ObservableList
 
 class MainActivityViewModel : BaseObservable() {
-    // Live Data List Of City Names
-    val citiesLiveData: LiveData<MutableList<String>> by lazy {
-        MutableLiveData(
-            mutableListOf<String>()
-        )
-    }
-
     val graphObservable = MutableLiveData(
             AutoGeneratingGraph<String>()
     ).apply {
