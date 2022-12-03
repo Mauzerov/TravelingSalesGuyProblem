@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import com.mauzerov.travelingsalesguyproblem.MainActivityViewModel
 import com.mauzerov.travelingsalesguyproblem.R
 import com.mauzerov.travelingsalesguyproblem.databinding.FragmentTspBinding
+import com.mauzerov.travelingsalesguyproblem.util.ObservableList
 
 class TSPFragment(private val sharedViewModel: MainActivityViewModel) : Fragment() {
     private lateinit var binding: FragmentTspBinding
@@ -36,6 +37,17 @@ class TSPFragment(private val sharedViewModel: MainActivityViewModel) : Fragment
                 requireContext(),
                 android.R.layout.select_dialog_item,
                 it.getNodes()))
+        }
+
+        sharedViewModel.bestPath.addObserver { _, arg ->
+            (arg as? ObservableList.Argument<*>)?.let { argument ->
+                val (updateType, city) = argument
+                binding.pathResult.adapter = ArrayAdapter(
+                    requireContext(),
+                    android.R.layout.simple_list_item_1,
+                    sharedViewModel.bestPath
+                )
+            }
         }
 
         binding.sharedVm = sharedViewModel
