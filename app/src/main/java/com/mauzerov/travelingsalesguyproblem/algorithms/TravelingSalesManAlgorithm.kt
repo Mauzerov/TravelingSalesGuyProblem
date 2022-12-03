@@ -1,4 +1,4 @@
-package com.mauzerov.travelingsalesguyproblem
+package com.mauzerov.travelingsalesguyproblem.algorithms
 
 import com.mauzerov.travelingsalesguyproblem.graph.Graph
 import com.mauzerov.travelingsalesguyproblem.util.DoubleArgumentMap
