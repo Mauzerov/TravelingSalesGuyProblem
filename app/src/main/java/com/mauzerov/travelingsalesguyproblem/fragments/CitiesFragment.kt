@@ -49,4 +49,12 @@ class CitiesFragment(private val sharedViewModel: MainActivityViewModel) : Fragm
         }
         return binding.root
     }
+
+    private val mCallbacks: PropertyChangeRegistry = PropertyChangeRegistry()
+    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) = mCallbacks.add(callback)
+    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) = mCallbacks.remove(callback)
+
+    private fun notifyPropertyChanged(fieldId: Int) {
+        mCallbacks.notifyCallbacks(this, fieldId, null)
+    }
 }
