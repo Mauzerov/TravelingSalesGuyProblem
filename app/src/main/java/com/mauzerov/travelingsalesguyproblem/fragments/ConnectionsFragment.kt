@@ -15,9 +15,7 @@ import com.mauzerov.travelingsalesguyproblem.MainActivityViewModel
 import com.mauzerov.travelingsalesguyproblem.R
 import com.mauzerov.travelingsalesguyproblem.databinding.FragmentConnectionsBinding
 
-class ConnectionsFragment(private val sharedViewModel: MainActivityViewModel) :
-    Fragment(),
-    Observable {
+class ConnectionsFragment(private val sharedViewModel: MainActivityViewModel) : Fragment(), Observable {
     private lateinit var binding: FragmentConnectionsBinding
     var toCity : Int = 0
     var fromCity : Int = 0
@@ -25,14 +23,14 @@ class ConnectionsFragment(private val sharedViewModel: MainActivityViewModel) :
     @Bindable
     var distance: String = ""
         get() {
-            return sharedViewModel.graph.getEdgeWeight(toCity, fromCity)?.toString() ?: ""
+            return sharedViewModel.graph[toCity, fromCity]?.toString() ?: ""
         }
 
         set(value) {
             if (value.isEmpty()) return
             field = value
             BR.distance
-            sharedViewModel.graph.setEdgeWeight(toCity, fromCity, value.toInt())
+            sharedViewModel.graph[toCity, fromCity] = value.toInt()
         }
     fun updateDistance() {
         notifyPropertyChanged(BR._all)
