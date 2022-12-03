@@ -16,24 +16,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragments.ConnectionsFragment">
-
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_button_square_size"/>
     <Spinner
         android:id="@+id/from_city_spinner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/image_button_square_size"
         android:onItemSelected="@{(parent, view, pos, id) -> self.updateDistance()}"
         android:selectedItemPosition="@={self.fromCity}" />
-
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_button_square_size"/>
     <Spinner
         android:id="@+id/to_city_spinner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/image_button_square_size"
         android:onItemSelected="@{(parent, view, pos, id) -> self.updateDistance()}"
         android:selectedItemPosition="@={self.toCity}" />
-    
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_button_square_size"/>
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/image_button_square_size"
         android:enabled="@{self.toCity != self.fromCity}"
         android:hint="Distance"
         android:text="@={self.distance}"
