@@ -33,10 +33,10 @@ class TSPFragment(private val sharedViewModel: MainActivityViewModel) : Fragment
         }
 
         sharedViewModel.graphObservable.observe(viewLifecycleOwner) {
-            binding.autocompleteStartCity.setAdapter(ArrayAdapter(
+            binding.fragmentTspStartCity.adapter = ArrayAdapter(
                 requireContext(),
                 android.R.layout.select_dialog_item,
-                it.getNodes()))
+                it.getNodes() + listOf("(Shortest)"))
         }
 
         sharedViewModel.bestPath.addObserver { _, arg ->
