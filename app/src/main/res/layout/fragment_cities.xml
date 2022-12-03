@@ -28,6 +28,7 @@
             android:text="@={self.cityName}" />
 
         <ImageButton
+            app:onClickListener="@{(v) -> self.getRandomCityName()}"
             android:layout_width="@dimen/image_button_square_size"
             android:layout_height="@dimen/image_button_square_size"
             tools:src="@android:drawable/stat_notify_sync" />

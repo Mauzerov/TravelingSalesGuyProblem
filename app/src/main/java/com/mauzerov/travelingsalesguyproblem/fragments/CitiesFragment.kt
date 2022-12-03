@@ -15,7 +15,18 @@ import com.mauzerov.travelingsalesguyproblem.databinding.FragmentCitiesBinding
 
 class CitiesFragment(private val sharedViewModel: MainActivityViewModel) : Fragment() {
     private lateinit var binding: FragmentCitiesBinding
+    @Bindable
     var cityName : String = ""
+
+    fun getRandomCityName() {
+        lifecycleScope.launch {
+            RandomCityName().collect {
+                cityName = it
+                notifyPropertyChanged(BR.cityName)
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
