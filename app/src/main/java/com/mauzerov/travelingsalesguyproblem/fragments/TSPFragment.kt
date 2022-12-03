@@ -25,13 +25,6 @@ class TSPFragment(private val sharedViewModel: MainActivityViewModel) : Fragment
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tsp, container, false)
 
-        sharedViewModel.citiesLiveData.observe(viewLifecycleOwner) {
-            binding.fragmentTspStartCity.adapter = ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_spinner_item,
-                it)
-        }
-
         sharedViewModel.graphObservable.observe(viewLifecycleOwner) {
             binding.fragmentTspStartCity.adapter = ArrayAdapter(
                 requireContext(),
