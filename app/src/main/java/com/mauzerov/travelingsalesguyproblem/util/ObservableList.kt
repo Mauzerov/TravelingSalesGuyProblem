@@ -4,7 +4,7 @@ import java.util.*
 
 class ObservableList<T>(private val wrapped: MutableList<T>): MutableList<T> by wrapped, Observable() {
     enum class ChangeType {
-        ADD, REMOVE, SET
+        ADD, REMOVE, SET, CLEAR
     }
     data class Argument<T>(val updateType: ChangeType, val element: T)
 
@@ -34,5 +34,17 @@ class ObservableList<T>(private val wrapped: MutableList<T>): MutableList<T> by 
             return`return`
         }
         throw IndexOutOfBoundsException()
+    }
+
+    override fun clear() {
+        wrapped.clear()
+        setChanged()
+        notifyObservers(Argument(ChangeType.CLEAR, null))
+    }
+
+    override fun addAll(elements: Collection<T>): Boolean {
+        for (e in elements)
+            wrapped.add(e)
+        return true
     }
 }
