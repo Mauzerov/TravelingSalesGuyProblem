@@ -20,22 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <EditText
-            android:layout_width="match_parent"
-            android:text="@={self.text}"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:text="dodaj"
-            app:onClickListener="@{(v) -> sharedVm.citiesLiveData.add(self.text)}"
-            android:layout_height="wrap_content"/>
-
-        <AutoCompleteTextView
-            android:id="@+id/autocompleteStartCity"
-            android:layout_width="match_parent"
-            android:completionThreshold="0"
-            android:text=""
-            android:layout_height="wrap_content"/>
 
         <Spinner
             android:id="@+id/fragmentTspStartCity"
