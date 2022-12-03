@@ -8,12 +8,23 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.databinding.Bindable
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.Observable
+import androidx.databinding.PropertyChangeRegistry
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
+import com.mauzerov.travelingsalesguyproblem.BR
 import com.mauzerov.travelingsalesguyproblem.MainActivityViewModel
 import com.mauzerov.travelingsalesguyproblem.R
+import com.mauzerov.travelingsalesguyproblem.RandomCityName
 import com.mauzerov.travelingsalesguyproblem.databinding.FragmentCitiesBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlin.random.Random
 
-class CitiesFragment(private val sharedViewModel: MainActivityViewModel) : Fragment() {
+class CitiesFragment(private val sharedViewModel: MainActivityViewModel) : Fragment(), Observable {
     private lateinit var binding: FragmentCitiesBinding
     @Bindable
     var cityName : String = ""
