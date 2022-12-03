@@ -1,12 +1,16 @@
 package com.mauzerov.travelingsalesguyproblem.graph
 
-import androidx.databinding.InverseMethod
 import com.mauzerov.travelingsalesguyproblem.util.ObservableList
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.random.Random
 
 class AutoGeneratingGraph<T> : Graph<T> {
     private val nodes: ObservableList<T> = ObservableList(mutableListOf())
     private val observers: MutableList<() -> Unit> = mutableListOf()
+
+    private val matrix = MutableList(0) { MutableList(0) { 0 } }
+    private var nodeCount = nodes.size
 
     fun addObserver(observer :  () -> Unit) {
         observers.add(observer)
@@ -24,23 +28,34 @@ class AutoGeneratingGraph<T> : Graph<T> {
 
     override fun addNode(node: T) {
         nodes.add(node)
-        for (existingNode in nodes) {
-            if (existingNode != node) {
-                edges.add(Graph.Edge(existingNode, node, Random.nextInt(1,100)))
-            }
-        }
+        matrix.add(MutableList(nodes.size - 1) { Random.nextInt(1, 100) })
     }
 
     override fun removeNode(node: T) {
-        nodes.remove(nodes.first { it == node })
+        val index = nodes.indexOfFirst { it == node }
+        nodes.removeAt(index)
+        matrix.removeAt(index)
+        for (i in index until nodes.size) {
+            matrix[i].removeAt(index)
+        }
     }
 
-    override fun addEdge(from: T, to: T, weight: Int) {
-        edges.add(Graph.Edge(from, to, weight))
+    override operator fun get(fromIndex: Int, toIndex: Int) : Int? {
+        return try {
+            matrix[max(fromIndex, toIndex)][min(fromIndex, toIndex)]
+        } catch (_: java.lang.IndexOutOfBoundsException) { null }
     }
 
-    override fun addEdge(fromIndex: Int, toIndex: Int, weight: Int) {
-        edges.add(Graph.Edge(nodes[fromIndex], nodes[toIndex], weight))
+    override operator fun get(index: Int) : T {
+        return nodes[index]
+    }
+
+    override operator fun set(fromIndex: Int, toIndex: Int, weight: Int) {
+        matrix[max(fromIndex, toIndex)][min(fromIndex, toIndex)] = weight
+    }
+
+    override operator fun set(index: Int, node: T) {
+        nodes[index] = node
     }
 
     override fun removeEdge(index: Int) {
@@ -63,32 +78,32 @@ class AutoGeneratingGraph<T> : Graph<T> {
         }
     }
 
-    override fun getEdgeWeight(from: T, to: T): Int? {
-        return edges.firstOrNull {
-            it.from == from && it.to == to ||
-            it.from == to && it.to == from
-        }?.weight
-    }
-
-    override fun getEdgeWeight(fromIndex: Int, toIndex: Int): Int? {
-        if (fromIndex !in nodes.indices || toIndex !in nodes.indices) {
-            return null
-        }
-
-        return getEdgeWeight(nodes[fromIndex], nodes[toIndex])
-    }
-
-    override fun setEdgeWeight(from: T, to: T, weight: Int){
-        edges.firstOrNull {
-            it.from == from && it.to == to ||
-            it.from == to && it.to == from
-        }?.weight = weight
-    }
-
-    override fun setEdgeWeight(fromIndex: Int, toIndex: Int, weight: Int){
-        if (fromIndex !in nodes.indices || toIndex !in nodes.indices) {
-            return
-        }
-        setEdgeWeight(nodes[fromIndex], nodes[toIndex], weight)
-    }
+//    override fun getEdgeWeight(from: T, to: T): Int? {
+//        return edges.firstOrNull {
+//            it.from == from && it.to == to ||
+//            it.from == to && it.to == from
+//        }?.weight
+//    }
+//
+//    override fun getEdgeWeight(fromIndex: Int, toIndex: Int): Int? {
+//        if (fromIndex !in nodes.indices || toIndex !in nodes.indices) {
+//            return null
+//        }
+//
+//        return getEdgeWeight(nodes[fromIndex], nodes[toIndex])
+//    }
+//
+//    override fun setEdgeWeight(from: T, to: T, weight: Int){
+//        edges.firstOrNull {
+//            it.from == from && it.to == to ||
+//            it.from == to && it.to == from
+//        }?.weight = weight
+//    }
+//
+//    override fun setEdgeWeight(fromIndex: Int, toIndex: Int, weight: Int){
+//        if (fromIndex !in nodes.indices || toIndex !in nodes.indices) {
+//            return
+//        }
+//        setEdgeWeight(nodes[fromIndex], nodes[toIndex], weight)
+//    }
 }

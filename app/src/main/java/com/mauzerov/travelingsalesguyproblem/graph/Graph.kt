@@ -11,21 +11,17 @@ interface Graph<T> {
 
     fun removeNode(node: T)
 
-    fun addEdge(from: T, to: T, weight: Int)
-
-    fun addEdge(fromIndex: Int, toIndex: Int, weight: Int)
-
     fun removeEdge(index: Int)
 
     fun getNodes(): List<T>
 
     fun getEdges(): List<Edge<T>>
 
-    fun getEdgeWeight(from: T, to: T): Int?
+    operator fun get(fromIndex: Int, toIndex: Int) : Int?
 
-    fun getEdgeWeight(fromIndex: Int, toIndex: Int): Int?
+    operator fun get(index : Int) : T
 
-    fun setEdgeWeight(from: T, to: T, weight: Int)
+    operator fun set(index: Int, node: T)
 
-    fun setEdgeWeight(fromIndex: Int, toIndex: Int, weight: Int)
+    operator fun set(fromIndex: Int, toIndex: Int, weight: Int)
 }
