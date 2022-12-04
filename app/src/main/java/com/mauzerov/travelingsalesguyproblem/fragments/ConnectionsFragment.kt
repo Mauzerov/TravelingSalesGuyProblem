@@ -32,10 +32,10 @@ class ConnectionsFragment(private val sharedViewModel: MainActivityViewModel) : 
             BR.distance
             sharedViewModel.graph[toCity, fromCity] = value.toInt()
         }
+
     fun updateDistance() {
         notifyPropertyChanged(BR._all)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +49,7 @@ class ConnectionsFragment(private val sharedViewModel: MainActivityViewModel) : 
         sharedViewModel.graphObservable.observe(viewLifecycleOwner) { graph ->
             ArrayAdapter<String>(
                 requireContext(),
-                android.R.layout.simple_spinner_item,
+                android.R.layout.simple_list_item_1,
                 graph.getNodes()
             ).let {
                 binding.fromCitySpinner.adapter = it
