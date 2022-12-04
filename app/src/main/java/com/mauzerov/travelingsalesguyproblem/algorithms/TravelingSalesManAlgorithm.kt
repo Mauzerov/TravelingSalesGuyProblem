@@ -46,7 +46,7 @@ fun <T> Graph<T>.travelingSalesMan(startNode: Int) : TravelingSalesManResult<T> 
 
                 val res = mutableListOf<Pair<Int, Int>>()
                 for (m in comb) {
-                    if (m == 0 || m == k) continue
+                    if (m == startNode || m == k) continue
                     cache[prev, m]?.first?.let {
                         res.add(Pair(it + this[m, k]!!, m))
                     }
@@ -57,7 +57,7 @@ fun <T> Graph<T>.travelingSalesMan(startNode: Int) : TravelingSalesManResult<T> 
             }
         }
     }
-    var bits = (1 shl n) - 2
+    var bits = ((1 shl n) -1) and (1 shl startNode).inv()
     val res = mutableListOf<Pair<Int, Int>>()
 
     for (k in 0 until n) {
@@ -68,7 +68,7 @@ fun <T> Graph<T>.travelingSalesMan(startNode: Int) : TravelingSalesManResult<T> 
     }
     var (otp, parent) = res.minWith(pairComparator())
 
-    val path = mutableListOf<T>()
+    val path = mutableListOf(this[startNode])
 
     for (i in 0 until n - 1) {
         path.add(this[parent])
