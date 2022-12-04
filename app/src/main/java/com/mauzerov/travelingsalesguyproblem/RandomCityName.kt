@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import java.net.URL
 
 object RandomCityName {
@@ -16,7 +17,7 @@ object RandomCityName {
                 // Parse To Json and return city
                 emit(
                     Json.parseToJsonElement(result)
-                        .jsonObject["city"]!!.toString()
+                        .jsonObject["city"]!!.jsonPrimitive.content
                 )
             }
     }.flowOn(Dispatchers.IO)
