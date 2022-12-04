@@ -40,6 +40,8 @@ class AutoGeneratingGraph<T> : Graph<T> {
         }
     }
 
+    // Todo: add remove node by index
+
     override operator fun get(fromIndex: Int, toIndex: Int) : Int? {
         return try {
             matrix[max(fromIndex, toIndex)][min(fromIndex, toIndex)]
@@ -77,33 +79,4 @@ class AutoGeneratingGraph<T> : Graph<T> {
             }
         }
     }
-
-//    override fun getEdgeWeight(from: T, to: T): Int? {
-//        return edges.firstOrNull {
-//            it.from == from && it.to == to ||
-//            it.from == to && it.to == from
-//        }?.weight
-//    }
-//
-//    override fun getEdgeWeight(fromIndex: Int, toIndex: Int): Int? {
-//        if (fromIndex !in nodes.indices || toIndex !in nodes.indices) {
-//            return null
-//        }
-//
-//        return getEdgeWeight(nodes[fromIndex], nodes[toIndex])
-//    }
-//
-//    override fun setEdgeWeight(from: T, to: T, weight: Int){
-//        edges.firstOrNull {
-//            it.from == from && it.to == to ||
-//            it.from == to && it.to == from
-//        }?.weight = weight
-//    }
-//
-//    override fun setEdgeWeight(fromIndex: Int, toIndex: Int, weight: Int){
-//        if (fromIndex !in nodes.indices || toIndex !in nodes.indices) {
-//            return
-//        }
-//        setEdgeWeight(nodes[fromIndex], nodes[toIndex], weight)
-//    }
 }

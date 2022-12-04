@@ -80,8 +80,16 @@ fun <T> Graph<T>.travelingSalesMan(startNode: Int) : TravelingSalesManResult<T> 
     return TravelingSalesManResult<T>(distance=otp, path=path.toList())
 }
 
-fun <T> Graph<T>.travelingSalesMan() : TravelingSalesManResult<T> {
-    return getNodes().indices.map {
-        travelingSalesMan(it)
-    }.minBy { it.distance }
+inline fun <reified T> Graph<T>.travelingSalesMan() : TravelingSalesManResult<T> {
+    T::class.java.newInstance().let { dummyNode ->
+        getNodes().size.let { n ->
+            addNode(dummyNode)
+            for (i in 0 until n) this[n, i] = 0
+        }
+        val (distance, path) = travelingSalesMan(getNodes().size - 1)
+        removeNode(dummyNode)
+        path.subList(1, path.size - 1).let {
+            return TravelingSalesManResult(distance, it)
+        }
+    }
 }
