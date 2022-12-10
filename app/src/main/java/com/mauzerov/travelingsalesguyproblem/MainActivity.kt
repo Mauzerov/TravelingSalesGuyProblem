@@ -34,9 +34,9 @@ class MainActivity : AppCompatActivity() {
         }
         binding.viewPager.apply {
             adapter = TabLayoutAdapter(supportFragmentManager, lifecycle).apply {
-                addFragment(TSPFragment(mainActivityViewModel))
-                addFragment(CitiesFragment(mainActivityViewModel))
-                addFragment(ConnectionsFragment(mainActivityViewModel))
+                addFragment(TSPFragment.newInstance(mainActivityViewModel))
+                addFragment(CitiesFragment.newInstance(mainActivityViewModel))
+                addFragment(ConnectionsFragment.newInstance(mainActivityViewModel))
             }
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
