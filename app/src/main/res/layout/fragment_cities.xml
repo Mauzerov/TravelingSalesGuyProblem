@@ -32,10 +32,10 @@
             app:onClickListener="@{(v) -> self.getRandomCityName()}"
             android:layout_width="@dimen/image_button_square_size"
             android:layout_height="@dimen/image_button_square_size"
-            tools:src="@android:drawable/stat_notify_sync" />
+            android:src="@android:drawable/stat_notify_sync" />
 
         <ImageButton
-            app:onClickListener="@{(v) -> sharedVm.graph.addNode(self.cityName)}"
+            app:onClickListener="@{(v) -> self.addCity()}"
             android:layout_width="@dimen/image_button_square_size"
             android:layout_height="@dimen/image_button_square_size"
             android:src="@android:drawable/ic_input_add" />
