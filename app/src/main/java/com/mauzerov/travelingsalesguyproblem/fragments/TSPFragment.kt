@@ -22,6 +22,10 @@ class TSPFragment(private val sharedViewModel: MainActivityViewModel) : Fragment
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        arguments?.let {
+            sharedViewModel = it.get("sharedViewModel") as MainActivityViewModel
+        }
+
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tsp, container, false)
 
@@ -46,5 +50,15 @@ class TSPFragment(private val sharedViewModel: MainActivityViewModel) : Fragment
         binding.sharedVm = sharedViewModel
         binding.self = this
         return binding.root
+    }
+
+    companion object {
+        fun newInstance(sharedViewModel: MainActivityViewModel) : TSPFragment {
+            return TSPFragment().apply {
+                arguments = Bundle().apply {
+                    putSerializable("sharedViewModel", sharedViewModel)
+                }
+            }
+        }
     }
 }

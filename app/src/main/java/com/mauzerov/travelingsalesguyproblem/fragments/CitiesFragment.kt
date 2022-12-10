@@ -79,4 +79,14 @@ class CitiesFragment(private val sharedViewModel: MainActivityViewModel) : Fragm
     private fun notifyPropertyChanged(fieldId: Int) {
         mCallbacks.notifyCallbacks(this, fieldId, null)
     }
+
+   companion object {
+       fun newInstance(sharedViewModel: MainActivityViewModel) : CitiesFragment {
+           return CitiesFragment().apply {
+                arguments = Bundle().apply {
+                     putSerializable("sharedViewModel", sharedViewModel)
+                }
+           }
+       }
+   }
 }

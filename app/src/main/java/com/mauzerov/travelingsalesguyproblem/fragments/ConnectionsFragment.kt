@@ -15,8 +15,9 @@ import com.mauzerov.travelingsalesguyproblem.MainActivityViewModel
 import com.mauzerov.travelingsalesguyproblem.R
 import com.mauzerov.travelingsalesguyproblem.databinding.FragmentConnectionsBinding
 
-class ConnectionsFragment(private val sharedViewModel: MainActivityViewModel) : Fragment(), Observable {
+class ConnectionsFragment : Fragment(), Observable {
     private lateinit var binding: FragmentConnectionsBinding
+    private lateinit var sharedViewModel: MainActivityViewModel
     var toCity : Int = 0
     var fromCity : Int = 0
 
@@ -41,6 +42,9 @@ class ConnectionsFragment(private val sharedViewModel: MainActivityViewModel) : 
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        arguments?.let {
+            sharedViewModel = it.get("sharedViewModel") as MainActivityViewModel
+        }
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_connections, container, false)
         binding.self = this
@@ -65,5 +69,15 @@ class ConnectionsFragment(private val sharedViewModel: MainActivityViewModel) : 
 
     private fun notifyPropertyChanged(fieldId: Int) {
         mCallbacks.notifyCallbacks(this, fieldId, null)
+    }
+
+    companion object {
+        fun newInstance(sharedViewModel: MainActivityViewModel) : ConnectionsFragment {
+            return ConnectionsFragment().apply {
+                arguments = Bundle().apply {
+                    putSerializable("sharedViewModel", sharedViewModel)
+                }
+            }
+        }
     }
 }
