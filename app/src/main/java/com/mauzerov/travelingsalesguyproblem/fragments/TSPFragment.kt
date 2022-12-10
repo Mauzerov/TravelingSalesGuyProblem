@@ -1,23 +1,35 @@
 package com.mauzerov.travelingsalesguyproblem.fragments
 
+import android.Manifest
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.adapters.ViewBindingAdapter.setOnLongClickListener
 import com.mauzerov.travelingsalesguyproblem.MainActivityViewModel
 import com.mauzerov.travelingsalesguyproblem.R
 import com.mauzerov.travelingsalesguyproblem.databinding.FragmentTspBinding
 import com.mauzerov.travelingsalesguyproblem.util.ObservableList
+import com.mauzerov.travelingsalesguyproblem.util.saveViewAsImage
 
-class TSPFragment(private val sharedViewModel: MainActivityViewModel) : Fragment() {
+class TSPFragment : Fragment() {
     private lateinit var binding: FragmentTspBinding
-//    class Vm : BaseObservable(){
-//        @Bindable
-//    }
-    var text: String = ""
+    private lateinit var sharedViewModel: MainActivityViewModel
+
+    private val requestPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        if (granted) {
+            Toast.makeText(context, "Permission granted", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,6 +46,7 @@ class TSPFragment(private val sharedViewModel: MainActivityViewModel) : Fragment
                 requireContext(),
                 android.R.layout.select_dialog_item,
                 it.getNodes() + listOf("(Shortest)"))
+            sharedViewModel.tspStartCityPosition = it.getNodes().size
         }
 
         sharedViewModel.bestPath.addObserver { _, arg ->
@@ -44,6 +57,16 @@ class TSPFragment(private val sharedViewModel: MainActivityViewModel) : Fragment
                     android.R.layout.simple_list_item_1,
                     sharedViewModel.bestPath
                 )
+            }
+        }
+        binding.saveResultBtn.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(
+                        requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+
+                requestPermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            } else {
+                saveViewAsImage(binding.root, "tsp.jpg", requireContext())
             }
         }
 
