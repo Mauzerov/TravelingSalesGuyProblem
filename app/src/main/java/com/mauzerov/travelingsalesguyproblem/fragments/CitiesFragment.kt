@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.Bindable
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.Observable
@@ -24,10 +25,18 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
-class CitiesFragment(private val sharedViewModel: MainActivityViewModel) : Fragment(), Observable {
+class CitiesFragment : Fragment(), Observable {
     private lateinit var binding: FragmentCitiesBinding
+    private lateinit var sharedViewModel: MainActivityViewModel
     @Bindable
     var cityName : String = ""
+
+    fun addCity() {
+        if (cityName.isEmpty())
+            return Toast.makeText(requireContext(), "Miasto nie powinno być puste!", Toast.LENGTH_SHORT).show()
+        sharedViewModel.graph.addNode(cityName)
+        notifyPropertyChanged(BR._all)
+    }
 
     fun getRandomCityName() {
         lifecycleScope.launch {
@@ -42,6 +51,10 @@ class CitiesFragment(private val sharedViewModel: MainActivityViewModel) : Fragm
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        arguments?.let {
+            sharedViewModel = it.get("sharedViewModel") as MainActivityViewModel
+        }
+
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cities, container, false)
         binding.sharedVm = sharedViewModel
