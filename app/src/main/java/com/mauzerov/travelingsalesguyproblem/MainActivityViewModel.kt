@@ -10,7 +10,7 @@ import com.mauzerov.travelingsalesguyproblem.graph.AutoGeneratingGraph
 import com.mauzerov.travelingsalesguyproblem.graph.Graph
 import com.mauzerov.travelingsalesguyproblem.util.ObservableList
 
-class MainActivityViewModel : BaseObservable() {
+class MainActivityViewModel : BaseObservable(), java.io.Serializable {
     val graphObservable = MutableLiveData(
             AutoGeneratingGraph<String>()
     ).apply {
@@ -41,7 +41,5 @@ class MainActivityViewModel : BaseObservable() {
             bestPath.addAll(it.path)
         }
         notifyPropertyChanged(BR.distance)
-    }
-    init {
     }
 }
