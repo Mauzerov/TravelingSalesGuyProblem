@@ -39,5 +39,11 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/saveResultBtn"
+        android:layout_width="match_parent"
+        android:text="Zapisz Wynik"
+        android:layout_height="wrap_content">
+    </Button>
     </LinearLayout>
 </layout>
