@@ -57,3 +57,16 @@
 - Fragments For Display
 - Buttons For Adding
 
+## Projekt
+> Layout bazowany na dynamicznym generowanie oraz layout_weight
+> Po uruchomieniu: wyświetla głównego fragmentu
+> Możliwość zmainy widocznego fragmentu za pomocą tab layout i gesture swipe
+> Zminimalizowanie aplikacji nie czyści danych
+> Zamknięcie aplikacji czyści dane
+
+## Funkcjonowanie
+> Możliwość zmainy widocznego fragmentu za pomocą tab layout i gesture swipe
+> Czynności nie zajmujące dużej ilości czasu nie używają przycisków
+> Wybór danych na Spinner
+> Dodawanie danych na TextEdit
+> Dodatkowo losowe nazwy miast pobierane z publicznego api
